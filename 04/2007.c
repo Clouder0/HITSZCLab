@@ -32,7 +32,7 @@ int main()
         printf("%d", cur);
         // if(cur < 10) printf("  ");
         // else putchar(' ');
-        putchar('\t');
+        printf("\t");
         ++week_day;
         if (week_day == 7)
             putchar('\n'), week_day = 0;
