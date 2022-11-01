@@ -20,17 +20,35 @@ int record_num, isum, osum;
 
 char s[110];
 
-void input_record()
+int input_record()
 {
-    puts("Please input in the format of ID, username, income, outcome:");
     fgets(s, 110, stdin);
     if (sscanf(s, "%d %s %d %d", &records[record_num].id, records[record_num].username, &records[record_num].income, &records[record_num].outcome) != 4) {
-        puts("Input error!");
-        return;
+        puts("Input error! Please retry.");
+        return 0;
+    }
+    if(records[record_num].id < 10000 || records[record_num].id > 99999) {
+        puts("Input error! Please retry.");
+        return 0;
     }
     isum += records[record_num].income;
     osum += records[record_num].outcome;
     ++record_num;
+    return 1;
+}
+
+void input_records()
+{
+    puts("Please input the number of records:");
+    fgets(s, 110, stdin);
+    int input_num;
+    if (sscanf(s, "%d", &input_num) != 1 || input_num < 1 || record_num + input_num > 10) {
+        puts("Invalid input!");
+        return;
+    }
+    puts("Please input in the format of ID, username, income, outcome:");
+    while (input_num > 0)
+        input_num -= input_record();
 }
 
 void output_record(User* record)
@@ -77,7 +95,7 @@ int main()
             case 0:
                 return 0;
             case 1:
-                input_record();
+                input_records();
                 break;
             case 2:
                 sort_records();
