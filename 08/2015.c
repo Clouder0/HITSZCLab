@@ -91,6 +91,7 @@ int main()
         if (ret != 1 || (choice < 0 || choice > 6)) {
             puts("Invalid input! Please retry.");
         } else {
+            double avg;
             switch (choice) {
             case 0:
                 return 0;
@@ -119,7 +120,7 @@ int main()
                 printf("Average income: %.2f\nAverage outcome: %.2f\n", 1.0 * isum / record_num, 1.0 * osum / record_num);
                 break;
             case 5:
-                double avg = 1.0 * osum / record_num;
+                avg = 1.0 * osum / record_num;
                 for (int i = 0; i < record_num; ++i)
                     if (records[i].outcome > avg)
                         output_record(records + i);
